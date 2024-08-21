@@ -7,12 +7,9 @@ enum GameState {
 	GameWin
 };
 
-enum GameDifficulty {
-	Easy,
-	Medium,
-	Hard
-};
-
 class GameManager {
+private:
 
+public:
+	GameManager();
 };

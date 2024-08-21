@@ -1,12 +1,13 @@
 #pragma once
-#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include <vector>
 
 class GraphicsManager {
 private:
 
 	sf::RenderWindow* m_windowRef;
 	sf::Font m_font;
+	std::vector<sf::FloatRect> m_MainMenuButtonGlobalBounds;
 
 public:
 	GraphicsManager(sf::RenderWindow& t_window, sf::Font& t_font);
@@ -18,4 +19,6 @@ public:
 	void HideUI();
 
 	void RenderGameScene();
+
+	std::vector<sf::FloatRect> getMMGB() { return this->m_MainMenuButtonGlobalBounds;}
 };

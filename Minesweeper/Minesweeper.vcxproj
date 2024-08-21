@@ -147,12 +147,14 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MouseEventHandler.cpp" />
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GraphicsManager.h" />
+    <ClInclude Include="MouseEventHandler.h" />
     <ClInclude Include="Tile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

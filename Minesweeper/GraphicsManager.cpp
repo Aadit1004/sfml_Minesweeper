@@ -53,6 +53,8 @@ void GraphicsManager::RenderMainMenu() {
     for (size_t i = 0; i < buttons.size(); ++i) {
         m_windowRef->draw(buttons[i]);
         m_windowRef->draw(buttonTexts[i]);
+
+        this->m_MainMenuButtonGlobalBounds.push_back(buttons[i].getGlobalBounds());
     }
 }
 
@@ -61,5 +63,5 @@ void GraphicsManager::HideUI() {
     this->m_windowRef->display();
 }
 void GraphicsManager::RenderGameScene() {
-    
+    // generate board
 }

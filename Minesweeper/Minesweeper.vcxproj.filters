@@ -28,6 +28,9 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="MouseEventHandler.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -40,6 +43,9 @@
       <Filter>Source Files\header</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsManager.h">
+      <Filter>Source Files\header</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseEventHandler.h">
       <Filter>Source Files\header</Filter>
     </ClInclude>
   </ItemGroup>

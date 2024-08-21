@@ -1,9 +1,8 @@
 #include <iostream>
-#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include "GameManager.h"
 #include "GraphicsManager.h"
-
+#include "MouseEventHandler.h"
 #include <filesystem>
 
 int main()
@@ -18,9 +17,13 @@ int main()
         return EXIT_FAILURE;
     }
 
+    GameManager gameManager();
     GraphicsManager graphicsRender(window, font);
-
     GameState currState = MainMenu;
+    MouseEventHandler mouseEventHandler(window, currState, &graphicsRender);
+    
+    window.clear(sf::Color::White);
+    graphicsRender.RenderMainMenu();
 
     while (window.isOpen())
     {
@@ -30,28 +33,10 @@ int main()
             if (event.type == sf::Event::Closed) window.close();
 
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-                sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-                std::cout << "Mouse clicked at: " << mousePos.x << ", " << mousePos.y << std::endl;
+                mouseEventHandler.MouseClicked(sf::Mouse::getPosition(window));
             }
         }
-
-        // Clear screen
-        window.clear(sf::Color::White);
-        
-        switch (currState) {
-        case MainMenu:
-            graphicsRender.RenderMainMenu();
-            break;
-        case InGame:
-            break;
-        case GameLose:
-            break;
-        case GameWin:
-            break;
-        }
-
-        // check LMB button click based on currState
-
+        std::cout << currState << std::endl;
         // Update the window
         window.display();
     }
