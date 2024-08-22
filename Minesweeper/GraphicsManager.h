@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "Board.h"
 
 class GraphicsManager {
 private:
@@ -18,7 +19,7 @@ public:
 
 	void HideUI();
 
-	void RenderGameScene();
+	void RenderGameScene(Board& board);
 
 	std::vector<sf::FloatRect> getMMGB() { return this->m_MainMenuButtonGlobalBounds;}
 };

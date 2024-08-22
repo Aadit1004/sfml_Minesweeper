@@ -50,10 +50,13 @@ void GraphicsManager::RenderMainMenu() {
 
     m_windowRef->draw(TitleTxt);
 
+    if (!this->m_MainMenuButtonGlobalBounds.empty()) {
+        this->m_MainMenuButtonGlobalBounds.clear();
+    }
     for (size_t i = 0; i < buttons.size(); ++i) {
         m_windowRef->draw(buttons[i]);
         m_windowRef->draw(buttonTexts[i]);
-
+        
         this->m_MainMenuButtonGlobalBounds.push_back(buttons[i].getGlobalBounds());
     }
 }
@@ -62,6 +65,7 @@ void GraphicsManager::HideUI() {
     this->m_windowRef->clear(sf::Color::White);
     this->m_windowRef->display();
 }
-void GraphicsManager::RenderGameScene() {
+void GraphicsManager::RenderGameScene(Board& board) {
     // generate board
+    board.render(*m_windowRef);
 }

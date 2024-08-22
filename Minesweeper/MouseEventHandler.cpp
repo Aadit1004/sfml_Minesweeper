@@ -33,6 +33,9 @@ void MouseEventHandler::handleMainMenu(sf::Vector2i mousePos) {
 		*this->m_currState = InGame;
 		this->m_graphicsRender->HideUI();
 		// To-do: generate board with easy mode
+		auto* gameBoard = new Board(9, 9, 10);
+		gameBoard->generateBoard(this->m_windowRef);
+		gameBoard->render(*this->m_windowRef);
 	}
 
 	if (MMGB[1].contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y))) {
@@ -40,6 +43,9 @@ void MouseEventHandler::handleMainMenu(sf::Vector2i mousePos) {
 		*this->m_currState = InGame;
 		this->m_graphicsRender->HideUI();
 		// To-do: generate board with medium mode
+		auto* gameBoard = new Board(16, 16, 40);
+		gameBoard->generateBoard(this->m_windowRef);
+		gameBoard->render(*this->m_windowRef);
 	}
 
 	if (MMGB[2].contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y))) {
@@ -47,11 +53,15 @@ void MouseEventHandler::handleMainMenu(sf::Vector2i mousePos) {
 		*this->m_currState = InGame;
 		this->m_graphicsRender->HideUI();
 		// To-do: generate board with hard mode
+		auto* gameBoard = new Board(22, 22, 99);
+		gameBoard->generateBoard(this->m_windowRef);
+		gameBoard->render(*this->m_windowRef);
 	}
 }
 
 void MouseEventHandler::handleInGame() {
 	// check if hit on grid
+
 }
   
 void MouseEventHandler::handleLoseGame() {

@@ -36,7 +36,7 @@ int main()
                 mouseEventHandler.MouseClicked(sf::Mouse::getPosition(window));
             }
         }
-        std::cout << currState << std::endl;
+        
         // Update the window
         window.display();
     }

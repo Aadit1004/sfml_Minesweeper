@@ -4,6 +4,7 @@
 #include "GameManager.h"
 #include "GraphicsManager.h"
 #include <vector>
+#include "Board.h"
 
 class MouseEventHandler {
 private:
