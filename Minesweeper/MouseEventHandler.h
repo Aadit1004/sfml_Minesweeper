@@ -11,10 +11,11 @@ private:
 	sf::RenderWindow* m_windowRef;
 	GameState* m_currState;
 	GraphicsManager* m_graphicsRender;
+	Board* m_gameBoard;
 
 	void handleMainMenu(sf::Vector2i mousePos);
 
-	void handleInGame();
+	void handleInGame(sf::Vector2i mousePos);
 
 	void handleLoseGame();
 

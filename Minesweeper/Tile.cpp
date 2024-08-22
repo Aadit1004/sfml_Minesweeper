@@ -11,7 +11,6 @@ Tile::Tile(bool t_isMine, sf::Vector2f size, sf::Vector2f position) : m_isMine(t
 
 void Tile::setMine(bool t_isMine) {
     m_isMine = t_isMine;
-    m_shape.setFillColor(sf::Color::Black); // to remove, for testing
 }
 
 bool Tile::isMine() const {
@@ -21,8 +20,19 @@ bool Tile::isMine() const {
 void Tile::setRevealed(bool t_isRevealed) {
     m_isRevealed = t_isRevealed;
     if (t_isRevealed) {
+        std::cout << this->m_adjacentMines << std::endl;
+       
         // display number
         // if bomb, end game
+        if (m_isMine) {
+            m_shape.setFillColor(sf::Color::Red);
+            // Handle Lose Game
+        }
+        else {
+            sf::Color darkGray(120, 120, 120);
+            m_shape.setFillColor(darkGray);
+            // display number if between 1 and 8 inclusive
+        }
     }
 }
 

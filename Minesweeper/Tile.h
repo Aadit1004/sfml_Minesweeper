@@ -1,6 +1,7 @@
 #pragma once
 #include <utility>
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 class Tile {
 private:

@@ -22,5 +22,10 @@ public:
 	void revealTile(int t_posX, int t_posY);
 	bool checkWin() const;
 
+	int getNumRows() { return this->m_numRows; }
+	int getNumCols() { return this->m_numCols; }
+	int getNumMines() { return this->m_numMines; }
+	Tile getTile(int t_posX, int t_posY) { return this->m_grid[t_posX][t_posY];}
+
 	void render(sf::RenderWindow& window);
 };

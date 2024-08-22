@@ -73,17 +73,23 @@ void Board::calculateAdjacency() {
 }
 
 void Board::revealTile(int t_posX, int t_posY) {
+
+    if (m_grid[t_posX][t_posY].isMine()) {
+        std::cout << "BOMB" << std::endl;
+        return;
+    }
     if (t_posX >= 0 && t_posX < m_numRows && t_posY >= 0 && t_posY < m_numCols) {
         if (!m_grid[t_posX][t_posY].isRevealed()) {
             m_grid[t_posX][t_posY].setRevealed(true);
 
-            if (m_grid[t_posX][t_posY].getAdjacentMines() == 0) {
+            // BREAKING BUG
+            /*if (m_grid[t_posX][t_posY].getAdjacentMines() == 0) {
                 for (int i = -1; i <= 1; ++i) {
                     for (int j = -1; j <= 1; ++j) {
                         revealTile(t_posX + i, t_posY + j);
                     }
                 }
-            }
+            }*/
         }
     }
 }
