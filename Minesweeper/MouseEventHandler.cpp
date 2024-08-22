@@ -16,10 +16,10 @@ void MouseEventHandler::MouseClicked(sf::Vector2i t_mousePos) {
 		this->handleInGame(t_mousePos);
 		break;
 	case GameLose:
-		this->handleLoseGame();
+		this->handleLoseGame(t_mousePos);
 		break;
 	case GameWin:
-		this->handleWinGame();
+		this->handleWinGame(t_mousePos);
 		break;
 	}
 }
@@ -85,22 +85,19 @@ void MouseEventHandler::handleInGame(sf::Vector2i t_mousePos) {
 		// std::cout << "Tile clicked at row: " << row << ", col: " << col << std::endl;
 
 		if (row >= 0 && row < this->m_gameBoard->getNumRows() && col >= 0 && col < this->m_gameBoard->getNumCols()) {
-			this->m_gameBoard->revealTile(row, col, *this->m_windowRef);
+			this->m_gameBoard->revealTile(row, col, *this->m_windowRef, *this->m_currState);
 			this->m_gameBoard->getTile(row, col).render(*this->m_windowRef);
 		}
-
-		/*this->m_gameBoard->revealTile(row, col, *this->m_windowRef); 
-		this->m_gameBoard->getTile(row, col).render(*this->m_windowRef);*/
 	}
 	
 }
   
-void MouseEventHandler::handleLoseGame() {
+void MouseEventHandler::handleLoseGame(sf::Vector2i t_mousePos) {
 	// check if hit backToMainMenu button
 	this->m_gameBoard = nullptr;
 }
 
-void MouseEventHandler::handleWinGame() {
+void MouseEventHandler::handleWinGame(sf::Vector2i t_mousePos) {
 	// check if hit backToMainMenu button
 	this->m_gameBoard = nullptr;
 }

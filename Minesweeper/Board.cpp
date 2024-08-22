@@ -1,6 +1,6 @@
 #include "Board.h"
 
-Board::Board(int t_numRows, int t_numCols, int t_numMines, sf::Font& t_font) : m_numRows(t_numRows), m_numCols(t_numCols), m_numMines(t_numMines), m_isGameEnded(false), m_font(t_font) {}
+Board::Board(int t_numRows, int t_numCols, int t_numMines, sf::Font& t_font) : m_numRows(t_numRows), m_numCols(t_numCols), m_numMines(t_numMines), m_font(t_font) {}
 
 void Board::generateBoard(sf::RenderWindow* t_windowRef) {
     float tileSize;
@@ -32,6 +32,7 @@ void Board::generateBoard(sf::RenderWindow* t_windowRef) {
 }
 
 void Board::placeMines() {
+    srand(static_cast<unsigned int>(time(0)));
     int placedMines = 0;
 
     // set mines randomly accross board, no overlapping mines
@@ -72,16 +73,21 @@ void Board::calculateAdjacency() {
     }
 }
 
-void Board::revealTile(int t_posX, int t_posY, sf::RenderWindow& t_window) {
+void Board::revealTile(int t_posX, int t_posY, sf::RenderWindow& t_window, GameState& currState) {
     if (t_posX >= 0 && t_posX < m_numRows && t_posY >= 0 && t_posY < m_numCols)
     {
         if (m_grid[t_posX][t_posY].isMine()) {
             // Handle Lose Game
             std::cout << "BOMB" << std::endl;
+            currState = GameLose;
             return;
         }
         else {
             revealTileHelper(t_posX, t_posY, t_window);
+            if (checkWin()) {
+                currState = GameWin;
+                std::cout << "GAME WIN" << std::endl;
+            }
         }
     }
 }
@@ -104,7 +110,17 @@ void Board::revealTileHelper(int t_posX, int t_posY, sf::RenderWindow& t_window)
 }
 
 bool Board::checkWin() const {
-    return this->m_isGameEnded;
+    int revealedCount = 0;
+    int nonMineTiles = m_numRows * m_numCols - m_numMines;
+
+    for (int row = 0; row < m_numRows; ++row) {
+        for (int col = 0; col < m_numCols; ++col) {
+            if (m_grid[row][col].isRevealed() && !m_grid[row][col].isMine()) {
+                revealedCount++;
+            }
+        }
+    }
+    return (revealedCount == nonMineTiles);
 }
 
 void Board::render(sf::RenderWindow& window) {

@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "Tile.h"
 #include <string> 
+#include "GameManager.h"
 
 class Board {
 private:
@@ -11,7 +12,6 @@ private:
 	int m_numRows;
 	int m_numCols;
 	int m_numMines;
-	bool m_isGameEnded;
 	sf::Font m_font;
 
 	void revealTileHelper(int t_posX, int t_posY, sf::RenderWindow& t_window);
@@ -23,7 +23,7 @@ public:
 	void generateBoard(sf::RenderWindow* t_windowRef);
 	void placeMines();
 	void calculateAdjacency();
-	void revealTile(int t_posX, int t_posY, sf::RenderWindow& t_window);
+	void revealTile(int t_posX, int t_posY, sf::RenderWindow& t_window, GameState& currState);
 	bool checkWin() const;
 
 	int getNumRows() { return this->m_numRows; }
