@@ -2,6 +2,7 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "Tile.h"
+#include <string> 
 
 class Board {
 private:
@@ -11,15 +12,18 @@ private:
 	int m_numCols;
 	int m_numMines;
 	bool m_isGameEnded;
+	sf::Font m_font;
+
+	void revealTileHelper(int t_posX, int t_posY, sf::RenderWindow& t_window);
 
 public:
 
-	Board(int t_numRows, int t_numCols, int t_numMines);
+	Board(int t_numRows, int t_numCols, int t_numMines, sf::Font& t_font);
 
 	void generateBoard(sf::RenderWindow* t_windowRef);
 	void placeMines();
 	void calculateAdjacency();
-	void revealTile(int t_posX, int t_posY);
+	void revealTile(int t_posX, int t_posY, sf::RenderWindow& t_window);
 	bool checkWin() const;
 
 	int getNumRows() { return this->m_numRows; }

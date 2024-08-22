@@ -14,9 +14,11 @@ private:
 
 	sf::RectangleShape m_shape; // Shape for rendering the tile
 
+    sf::Text m_text;
+
 public:
 
-    Tile(bool t_isMine, sf::Vector2f size, sf::Vector2f position);
+    Tile(bool t_isMine, sf::Vector2f size, sf::Vector2f position, sf::Font& t_font);
 
     void setMine(bool t_isMine);
     bool isMine() const;

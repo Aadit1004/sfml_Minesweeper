@@ -20,7 +20,7 @@ int main()
     GameManager gameManager();
     GraphicsManager graphicsRender(window, font);
     GameState currState = MainMenu;
-    MouseEventHandler mouseEventHandler(window, currState, &graphicsRender);
+    MouseEventHandler mouseEventHandler(window, currState, &graphicsRender, font);
     
     window.clear(sf::Color::White);
     graphicsRender.RenderMainMenu();

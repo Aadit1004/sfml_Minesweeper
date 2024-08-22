@@ -1,6 +1,6 @@
 #include "MouseEventHandler.h"
 
-MouseEventHandler::MouseEventHandler(sf::RenderWindow& t_window, GameState& currState, GraphicsManager* t_graphicsRender) : m_gameBoard(nullptr) {
+MouseEventHandler::MouseEventHandler(sf::RenderWindow& t_window, GameState& currState, GraphicsManager* t_graphicsRender, sf::Font& t_font) : m_gameBoard(nullptr), m_font(t_font) {
 	this->m_windowRef = &t_window;
 	this->m_currState = &currState;
 	this->m_graphicsRender = t_graphicsRender;
@@ -33,7 +33,7 @@ void MouseEventHandler::handleMainMenu(sf::Vector2i t_mousePos) {
 		*this->m_currState = InGame;
 		this->m_graphicsRender->HideUI();
 		// To-do: generate board with easy mode
-		this->m_gameBoard = new Board(9, 9, 10);
+		this->m_gameBoard = new Board(9, 9, 10, this->m_font);
 		this->m_gameBoard->generateBoard(this->m_windowRef);
 		this->m_gameBoard->render(*this->m_windowRef);
 	}
@@ -43,7 +43,7 @@ void MouseEventHandler::handleMainMenu(sf::Vector2i t_mousePos) {
 		*this->m_currState = InGame;
 		this->m_graphicsRender->HideUI();
 		// To-do: generate board with medium mode
-		this->m_gameBoard = new Board(16, 16, 40);
+		this->m_gameBoard = new Board(16, 16, 40, this->m_font);
 		this->m_gameBoard->generateBoard(this->m_windowRef);
 		this->m_gameBoard->render(*this->m_windowRef);
 	}
@@ -53,7 +53,7 @@ void MouseEventHandler::handleMainMenu(sf::Vector2i t_mousePos) {
 		*this->m_currState = InGame;
 		this->m_graphicsRender->HideUI();
 		// To-do: generate board with hard mode
-		this->m_gameBoard = new Board(22, 22, 99);
+		this->m_gameBoard = new Board(22, 22, 99, this->m_font);
 		this->m_gameBoard->generateBoard(this->m_windowRef);
 		this->m_gameBoard->render(*this->m_windowRef);
 	}
@@ -66,7 +66,7 @@ void MouseEventHandler::handleInGame(sf::Vector2i t_mousePos) {
 		tileSize = 50.0f;
 	}
 	else if (this->m_gameBoard->getNumMines() == 40) {
-		tileSize = 45.0f;
+		tileSize = 35.0f;
 	}
 	else {
 		tileSize = 26.0f;
@@ -84,9 +84,13 @@ void MouseEventHandler::handleInGame(sf::Vector2i t_mousePos) {
 
 		// std::cout << "Tile clicked at row: " << row << ", col: " << col << std::endl;
 
-		// Now you can call a method on the board to reveal the tile, flag it, etc.
-		this->m_gameBoard->revealTile(row, col);  // Example of revealing the tile
-		this->m_gameBoard->getTile(row, col).render(*this->m_windowRef);
+		if (row >= 0 && row < this->m_gameBoard->getNumRows() && col >= 0 && col < this->m_gameBoard->getNumCols()) {
+			this->m_gameBoard->revealTile(row, col, *this->m_windowRef);
+			this->m_gameBoard->getTile(row, col).render(*this->m_windowRef);
+		}
+
+		/*this->m_gameBoard->revealTile(row, col, *this->m_windowRef); 
+		this->m_gameBoard->getTile(row, col).render(*this->m_windowRef);*/
 	}
 	
 }

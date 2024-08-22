@@ -12,6 +12,7 @@ private:
 	GameState* m_currState;
 	GraphicsManager* m_graphicsRender;
 	Board* m_gameBoard;
+	sf::Font m_font;
 
 	void handleMainMenu(sf::Vector2i mousePos);
 
@@ -22,7 +23,7 @@ private:
 	void handleWinGame();
 
 public:
-	MouseEventHandler(sf::RenderWindow& t_window, GameState& currState, GraphicsManager* t_graphicsRender);
+	MouseEventHandler(sf::RenderWindow& t_window, GameState& currState, GraphicsManager* t_graphicsRender, sf::Font& t_font);
 
 	void MouseClicked(sf::Vector2i t_mousePos);
 };
