@@ -1,6 +1,6 @@
 #include "Tile.h"
 
-Tile::Tile(bool t_isMine, sf::Vector2f size, sf::Vector2f position, sf::Font& t_font) : m_isMine(t_isMine), m_isRevealed(false), m_isFlagged(false), m_adjacentMines(0) {
+Tile::Tile(bool t_isMine, sf::Vector2f size, sf::Vector2f position, sf::Font& t_font) : m_isMine(t_isMine), m_isRevealed(false), m_adjacentMines(0) {
     m_shape.setSize(size);
     sf::Color lightGray(211, 211, 211);
     m_shape.setFillColor(lightGray);
@@ -38,20 +38,6 @@ void Tile::setRevealed(bool t_isRevealed) {
 
 bool Tile::isRevealed() const {
     return m_isRevealed;
-}
-
-void Tile::toggleFlag() {
-    m_isFlagged = !m_isFlagged;
-    if (m_isFlagged) {
-        // draw octagon on top of square
-    }
-    else {
-        // remove octagon on top of square
-    }
-}
-
-bool Tile::isFlagged() const {
-    return m_isFlagged;
 }
 
 void Tile::setAdjacentMines(int t_adjacentMines) {

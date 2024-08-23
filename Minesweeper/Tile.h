@@ -9,7 +9,6 @@ private:
 
 	bool m_isMine;
 	bool m_isRevealed;
-	bool m_isFlagged;
 	int m_adjacentMines;
 	std::pair<int, int> m_position; // (row, column)
 
@@ -26,9 +25,6 @@ public:
 
     void setRevealed(bool t_isRevealed);
     bool isRevealed() const;
-
-    void toggleFlag();
-    bool isFlagged() const;
 
     void setAdjacentMines(int t_adjacentMines);
     int getAdjacentMines() const;
