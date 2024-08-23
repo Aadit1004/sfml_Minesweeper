@@ -14,6 +14,7 @@ Tile::Tile(bool t_isMine, sf::Vector2f size, sf::Vector2f position, sf::Font& t_
 
 void Tile::setMine(bool t_isMine) {
     m_isMine = t_isMine;
+    // m_shape.setFillColor(sf::Color::Red);
 }
 
 bool Tile::isMine() const {
@@ -80,7 +81,10 @@ std::pair<int, int> Tile::getPosition() const {
     return m_position;
 }
 
-void Tile::render(sf::RenderWindow& window) {
+void Tile::render(sf::RenderWindow& window, GameState& currState) {
+    if (currState == GameWin || currState == GameLose) {
+        return;
+    }
     window.draw(m_shape);
     if (m_isRevealed && m_adjacentMines > 0) {
         window.draw(m_text);

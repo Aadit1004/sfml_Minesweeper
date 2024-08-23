@@ -2,6 +2,7 @@
 #include <utility>
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "GameManager.h"
 
 class Tile {
 private:
@@ -35,5 +36,5 @@ public:
     void setPosition(int x, int y);
     std::pair<int, int> getPosition() const;
 
-    void render(sf::RenderWindow& window);
+    void render(sf::RenderWindow& window, GameState& currState);
 };

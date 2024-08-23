@@ -19,7 +19,7 @@ public:
 
 	void HideUI();
 
-	void RenderGameScene(Board& board);
+	void RenderGameScene(Board& board, GameState& currState);
 
 	std::vector<sf::FloatRect> getMMGB() { return this->m_MainMenuButtonGlobalBounds;}
 };

@@ -65,7 +65,7 @@ void GraphicsManager::HideUI() {
     this->m_windowRef->clear(sf::Color::White);
     this->m_windowRef->display();
 }
-void GraphicsManager::RenderGameScene(Board& board) {
+void GraphicsManager::RenderGameScene(Board& board, GameState& currState) {
     // generate board
-    board.render(*m_windowRef);
+    board.render(*m_windowRef, currState);
 }

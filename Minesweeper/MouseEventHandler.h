@@ -18,9 +18,7 @@ private:
 
 	void handleInGame(sf::Vector2i mousePos);
 
-	void handleLoseGame(sf::Vector2i t_mousePos);
-
-	void handleWinGame(sf::Vector2i t_mousePos);
+	void handleEndGame(sf::Vector2i t_mousePos);
 
 public:
 	MouseEventHandler(sf::RenderWindow& t_window, GameState& currState, GraphicsManager* t_graphicsRender, sf::Font& t_font);

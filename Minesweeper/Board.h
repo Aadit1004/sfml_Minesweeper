@@ -13,8 +13,11 @@ private:
 	int m_numCols;
 	int m_numMines;
 	sf::Font m_font;
+	sf::FloatRect backToMMglobalBounds;
 
-	void revealTileHelper(int t_posX, int t_posY, sf::RenderWindow& t_window);
+	void revealTileHelper(int t_posX, int t_posY, sf::RenderWindow& t_window, GameState& currState);
+
+	void createEndGameScreen(sf::RenderWindow& t_window, std::string t_text);
 
 public:
 
@@ -31,5 +34,7 @@ public:
 	int getNumMines() { return this->m_numMines; }
 	Tile getTile(int t_posX, int t_posY) { return this->m_grid[t_posX][t_posY];}
 
-	void render(sf::RenderWindow& window);
+	void render(sf::RenderWindow& window, GameState& currState);
+
+	sf::FloatRect getBackToMMGB() { return this->backToMMglobalBounds; }
 };

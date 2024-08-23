@@ -16,10 +16,10 @@ void MouseEventHandler::MouseClicked(sf::Vector2i t_mousePos) {
 		this->handleInGame(t_mousePos);
 		break;
 	case GameLose:
-		this->handleLoseGame(t_mousePos);
+		this->handleEndGame(t_mousePos);
 		break;
 	case GameWin:
-		this->handleWinGame(t_mousePos);
+		this->handleEndGame(t_mousePos);
 		break;
 	}
 }
@@ -35,7 +35,7 @@ void MouseEventHandler::handleMainMenu(sf::Vector2i t_mousePos) {
 		// To-do: generate board with easy mode
 		this->m_gameBoard = new Board(9, 9, 10, this->m_font);
 		this->m_gameBoard->generateBoard(this->m_windowRef);
-		this->m_gameBoard->render(*this->m_windowRef);
+		this->m_gameBoard->render(*this->m_windowRef, *this->m_currState);
 	}
 
 	if (MMGB[1].contains(static_cast<float>(t_mousePos.x), static_cast<float>(t_mousePos.y))) {
@@ -45,7 +45,7 @@ void MouseEventHandler::handleMainMenu(sf::Vector2i t_mousePos) {
 		// To-do: generate board with medium mode
 		this->m_gameBoard = new Board(16, 16, 40, this->m_font);
 		this->m_gameBoard->generateBoard(this->m_windowRef);
-		this->m_gameBoard->render(*this->m_windowRef);
+		this->m_gameBoard->render(*this->m_windowRef, *this->m_currState);
 	}
 
 	if (MMGB[2].contains(static_cast<float>(t_mousePos.x), static_cast<float>(t_mousePos.y))) {
@@ -55,7 +55,7 @@ void MouseEventHandler::handleMainMenu(sf::Vector2i t_mousePos) {
 		// To-do: generate board with hard mode
 		this->m_gameBoard = new Board(22, 22, 99, this->m_font);
 		this->m_gameBoard->generateBoard(this->m_windowRef);
-		this->m_gameBoard->render(*this->m_windowRef);
+		this->m_gameBoard->render(*this->m_windowRef, *this->m_currState);
 	}
 }
 
@@ -86,18 +86,20 @@ void MouseEventHandler::handleInGame(sf::Vector2i t_mousePos) {
 
 		if (row >= 0 && row < this->m_gameBoard->getNumRows() && col >= 0 && col < this->m_gameBoard->getNumCols()) {
 			this->m_gameBoard->revealTile(row, col, *this->m_windowRef, *this->m_currState);
-			this->m_gameBoard->getTile(row, col).render(*this->m_windowRef);
+			this->m_gameBoard->getTile(row, col).render(*this->m_windowRef, *this->m_currState);
 		}
 	}
 	
 }
   
-void MouseEventHandler::handleLoseGame(sf::Vector2i t_mousePos) {
+void MouseEventHandler::handleEndGame(sf::Vector2i t_mousePos) {
 	// check if hit backToMainMenu button
-	this->m_gameBoard = nullptr;
-}
 
-void MouseEventHandler::handleWinGame(sf::Vector2i t_mousePos) {
-	// check if hit backToMainMenu button
-	this->m_gameBoard = nullptr;
+	if (this->m_gameBoard->getBackToMMGB().contains(static_cast<float>(t_mousePos.x), static_cast<float>(t_mousePos.y))) {
+		// reset and render menu
+		*this->m_currState = MainMenu;
+		this->m_graphicsRender->HideUI();
+		this->m_graphicsRender->RenderMainMenu();
+		this->m_gameBoard = nullptr;
+	}
 }
